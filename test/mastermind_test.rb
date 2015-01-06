@@ -26,11 +26,16 @@ class MastermindTest < Minitest::Test
     new_answer = new_master.answer
     rand_answer != new_answer
   end
+  def guess_is_incorrect
 
-  def test_it_wins
+  end
+  def test_guess_is_correct
     skip
     mm = Mastermind.new
     result = mm.execute("BBGB")
     assert result.downcase.include?("win")
+  end
+  def test_quit_game_completely
+
   end
 end

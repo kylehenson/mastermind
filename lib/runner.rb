@@ -1,13 +1,19 @@
-require './lib/mastermind'
+require 'colorize'
+require_relative 'messages'
+require_relative 'mastermind'
+# require 'pry'
+# binding.pry
+# input = ""
+messages = Messages.new
+mastermind = Mastermind.new(messages)
+puts messages.welcome_message
 
-puts "Welcome to Mastermind"
+signal = :continue
 
-input = ""
-mastermind = Mastermind.new
-
-while input != "q"
+while signal == :continue
   print "> "
-  input = gets.chomp
-  puts mastermind.execute(input)
+  input = gets.strip
+  message, signal = mastermind.execute(input)
+  puts message
 end
-puts "Goodbye!"
+puts messages.end_game
