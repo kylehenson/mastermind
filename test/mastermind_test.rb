@@ -1,15 +1,19 @@
-require 'minitest/autorun'
-require 'minitest/pride'
-require '../lib/mastermind'
+require_relative 'test_helper'
+require_relative '../lib/mastermind'
+
 
 class MastermindTest < Minitest::Test
+  attr_reader :input
+
   def setup
     messages = Messages.new
     @master = Mastermind.new(messages)
   end
+
   def test_it_exists
     assert MastermindTest
   end
+
   def test_it_starts_a_game
     assert @master.answer.nil?
     message, signal = @master.execute('p')
@@ -17,6 +21,7 @@ class MastermindTest < Minitest::Test
     assert message.include? ('Take your best guess')
     assert_equal signal, :continue
   end
+
   def test_it_creates_an_answer
     @master.execute('p')
     rand_answer = @master.answer
@@ -26,15 +31,17 @@ class MastermindTest < Minitest::Test
     new_answer = new_master.answer
     rand_answer != new_answer
   end
-  def guess_is_incorrect
 
-  end
-  def test_guess_is_correct
+
+
+  def test_game_quits_while_playing
     skip
-    mm = Mastermind.new
-    result = mm.execute("BBGB")
-    assert result.downcase.include?("win")
+    assert @master.answer.any?
+    message, signal = @master.execute('q')
+    assert message.include? ('Thanks for playing.')
+    assert_equal signal, :stop
   end
+
   def test_quit_game_completely
 
   end

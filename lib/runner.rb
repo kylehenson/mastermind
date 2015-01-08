@@ -1,12 +1,13 @@
 require 'colorize'
-require_relative 'messages'
+require 'pry'
+require 'pry-byebug'
+
+require_relative 'message'
 require_relative 'mastermind'
-# require 'pry'
-# binding.pry
-# input = ""
-messages = Messages.new
-mastermind = Mastermind.new(messages)
-puts messages.welcome_message
+require_relative 'checker'
+
+mastermind = Mastermind.new
+puts Message.welcome
 
 signal = :continue
 
@@ -16,4 +17,5 @@ while signal == :continue
   message, signal = mastermind.execute(input)
   puts message
 end
-puts messages.end_game
+
+puts Message.end_game

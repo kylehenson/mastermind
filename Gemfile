@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'colorize'
 gem 'minitest'
 gem 'pry'
-gem 'colorize'
+gem 'pry-byebug'
