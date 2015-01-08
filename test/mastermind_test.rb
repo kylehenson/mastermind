@@ -42,7 +42,4 @@ class MastermindTest < Minitest::Test
     assert_equal signal, :stop
   end
 
-  def test_quit_game_completely
-
-  end
 end

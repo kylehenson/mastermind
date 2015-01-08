@@ -24,10 +24,10 @@ module Message
   end
 
   def self.quit
-    "\nThanks for playing!\nMaybe your luck will be better tomorrow."
+    "\nThanks for playing!"
   end
 
-  def self.end_game(guess, number_of_guesses)
-    "Congratulations! You guessed the sequence '#{guess}' in #{number_of_guesses} guesses over 4 minutes, 22 seconds.!"
+  def self.end_game(guess, number_of_guesses, total_time)
+    "Congratulations! You guessed the sequence '#{guess}' in #{number_of_guesses} guesses over #{total_time} seconds!\nWould you like to (p)lay or (q)uit?"
   end
 end
