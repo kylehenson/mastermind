@@ -43,7 +43,9 @@ class Mastermind
     if (input.downcase == 'q') || (input.downcase == 'quit')
       [Message.quit, :stop]
     else
-      if checker.guess_too_short?
+      if checker.invalid_input
+        [Message.invalid_guess, :continue]
+      elsif checker.guess_too_short?
         [Message.guess_too_short, :continue]
       elsif checker.guess_too_long?
         [Message.guess_too_long, :continue]

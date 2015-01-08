@@ -64,4 +64,11 @@ class CheckerTest < Minitest::Test
     assert_equal false, checker.guess_too_long?
   end
 
+  def test_it_rejects_invalid_input
+    guess   = 't'
+    answer  = 'rgby'
+    checker = Checker.new(guess, answer)
+    assert checker.invalid_input
+  end
+
 end

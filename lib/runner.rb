@@ -17,3 +17,5 @@ while signal == :continue
   message, signal = mastermind.execute(input)
   puts message
 end
+
+puts "Goodbye!"

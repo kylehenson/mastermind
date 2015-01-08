@@ -28,4 +28,8 @@ class Checker
     correct_pairs = letter_pairs.select { |pair| pair[0] == pair[1] }
     correct_pairs.length
   end
+
+  def invalid_input
+    guess.match(/[^RGYB]/)
+  end
 end

@@ -23,6 +23,10 @@ module Message
     "'#{guess}' has #{number_of_correct_colors} of the correct elements with #{number_of_correct_positions} in the correct positions. \nYou've taken #{number_of_guesses} guess(es)."
   end
 
+  def self.invalid_guess
+    "Your guess includes invalid elements.\nPlease guess(r)ed, (g)reen, (b)lue, and (y)ellow."
+  end
+
   def self.quit
     "\nThanks for playing!"
   end
