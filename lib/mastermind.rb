@@ -1,5 +1,5 @@
 class Mastermind
-  attr_reader :answer, :counter, :game_in_progress
+  attr_reader :answer, :counter, :game_in_progress, :checker, :input
 
   def initialize
     @answer           = create_answer
@@ -38,32 +38,42 @@ class Mastermind
   end
 
   def play_game(input)
-    checker = Checker.new(input, answer)
-    puts answer
+    @checker = Checker.new(input, answer)
     if (input.downcase == 'q') || (input.downcase == 'quit')
       [Message.quit, :stop]
+    elsif (input.downcase == 'c') || (input.downcase == 'cheat')
+      [Message.cheat(answer), :continue]
     else
-      if checker.invalid_input
-        [Message.invalid_guess, :continue]
-      elsif checker.guess_too_short?
-        [Message.guess_too_short, :continue]
-      elsif checker.guess_too_long?
-        [Message.guess_too_long, :continue]
-      elsif checker.correct?
-        @counter += 1
-        @game_in_progress = false
-        @stop_time = Time.now
-        @answer = create_answer
-        [Message.end_game(input, @counter, time_keeper), :continue]
-      else
-        @counter += 1
-        [Message.incorrect_guess(input, checker.color_check, checker.position_check, @counter), :continue]
-      end
+      play
     end
   end
 
+  def play
+    if @checker.invalid_input
+      [Message.invalid_guess, :continue]
+    elsif @checker.guess_too_short?
+      [Message.guess_too_short, :continue]
+    elsif @checker.guess_too_long?
+      [Message.guess_too_long, :continue]
+    elsif @checker.correct?
+      win
+    else
+      @counter += 1
+      [Message.incorrect_guess(@input, @checker.color_check, @checker.position_check, @counter), :continue]
+    end
+  end
+
+  def win
+    @counter += 1
+    @game_in_progress = false
+    @stop_time = Time.now
+    @answer = create_answer
+    [Message.end_game(@input, @counter, time_keeper), :continue]
+  end
+
   def time_keeper
-    @stop_time-@start_time
+    total_time = @stop_time-@start_time
+    Time.at(total_time).utc.strftime("%H:%M:%S")
   end
 
 end

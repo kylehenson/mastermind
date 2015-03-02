@@ -1,12 +1,13 @@
 require_relative 'test_helper'
 require_relative '../lib/mastermind'
+require_relative '../lib/message'
 
 
 class MastermindTest < Minitest::Test
   attr_reader :input
 
   def setup
-    messages = Messages.new
+    @messages = Message.new
     @master = Mastermind.new(messages)
   end
 

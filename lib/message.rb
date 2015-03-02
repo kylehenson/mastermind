@@ -24,7 +24,11 @@ module Message
   end
 
   def self.invalid_guess
-    "Your guess includes invalid elements.\nPlease guess(r)ed, (g)reen, (b)lue, and (y)ellow."
+    "Your guess includes invalid elements.\nPlease guess (r)ed, (g)reen, (b)lue, and (y)ellow."
+  end
+
+  def self.cheat(answer)
+    "The answer this round is: #{answer}"
   end
 
   def self.quit
