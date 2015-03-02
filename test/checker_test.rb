@@ -25,8 +25,19 @@ class CheckerTest < Minitest::Test
   def test_number_of_correct_colors_in_guess
     guess = 'rgrb'
     answer = 'rgyy'
+    guess2 = 'bggg'
+    answer2 = 'bbbg'
+    guess3 = 'yyyy'
+    answer3 = 'rybg'
+
     checker = Checker.new(guess, answer)
+    checker2 = Checker.new(guess2, answer2)
+    checker3 = Checker.new(guess3, answer3)
+
     assert_equal 2, checker.color_check
+    assert_equal 2, checker2.color_check
+    assert_equal 1, checker3.color_check
+
   end
 
   def test_number_of_correct_positions
